@@ -1,8 +1,9 @@
 {
     "cleanUrls": true,
+    "trailingSlash": true,
     "rewrites": [
         {
-            "source": "/teste/(.*)",
+            "source": "/teste/:path*",
             "destination": "/teste/index.html"
         },
         {
@@ -10,7 +11,7 @@
             "destination": "/teste/index.html"
         },
         {
-            "source": "/((?!teste|assets|favicon|icon).* )",
+            "source": "/((?!teste|assets|favicon|icon|vite|@vite|src).*)",
             "destination": "/index.html"
         }
     ]

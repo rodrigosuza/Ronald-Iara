@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -16,14 +17,14 @@ export default defineConfig(({ mode }) => {
     build: {
       rollupOptions: {
         input: {
-          main: 'index.html',
-          teste: 'teste/index.html',
+          main: path.resolve(__dirname, 'index.html'),
+          teste: path.resolve(__dirname, 'teste/index.html'),
         },
       },
     },
     resolve: {
       alias: {
-        '@': '.',
+        '@': path.resolve(__dirname, '.'),
       }
     }
   };
