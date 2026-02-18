@@ -205,6 +205,29 @@ const App: React.FC = () => {
     }
   };
 
+  const handleResetGift = async (id: string) => {
+    const { error } = await supabase
+      .from('gifts')
+      .update({
+        status: 'available',
+        guest_name: null,
+        guest_phone: null
+      })
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error resetting gift:', error);
+      alert("Erro ao liberar presente.");
+    } else {
+      setGifts(prev => prev.map(g => {
+        if (g.id === id) {
+          return { ...g, status: 'available', guestName: undefined, guestPhone: undefined };
+        }
+        return g;
+      }));
+    }
+  };
+
   // Render Login Modal if Admin is requested but not auth
   const renderLoginModal = () => (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/80 backdrop-blur-sm p-4">
@@ -241,7 +264,7 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-marsala-200 pb-10">
+    <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-marsala-200">
 
       {/* Navigation Bar - Compact for Mobile */}
       <nav className="fixed w-full z-40 bg-white/95 backdrop-blur-md border-b border-marsala-100 shadow-sm transition-all h-14 md:h-16">
@@ -307,20 +330,35 @@ const App: React.FC = () => {
 
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-stone-200 py-8 text-center px-4 space-y-4">
-        <div>
-          <p className="font-serif text-xl text-marsala-800 mb-1">Ronald & Iara</p>
-          <p className="text-stone-400 text-xs">© 2026 - Celebrando o Amor</p>
-        </div>
+      {/* Footer - Enlarged and Premium */}
+      <footer className="bg-marsala-900 border-t border-marsala-800 pt-16 pb-12 text-center px-4 mt-6">
+        <div className="max-w-xs mx-auto space-y-8">
+          <div className="space-y-2">
+            <p className="font-serif text-4xl text-white tracking-widest">Ronald & Iara</p>
+            <div className="w-12 h-0.5 bg-marsala-400 mx-auto rounded-full"></div>
+            <p className="text-marsala-200 text-sm uppercase tracking-widest font-light">Casamento 2026</p>
+          </div>
 
-        <div className="pt-4 border-t border-stone-100 max-w-xs mx-auto">
-          <p className="text-stone-400 text-[10px]">
-            Criado por <a href="https://www.instagram.com/souza_dsr" target="_blank" rel="noopener noreferrer" className="font-bold text-marsala-700 hover:text-marsala-900 transition-colors">Rodrigo Souza</a>
+          <p className="text-marsala-100/60 font-serif italic text-lg leading-relaxed">
+            "O amor é paciente, o amor é bondoso..."
           </p>
-          <p className="text-stone-400 text-[10px] flex items-center justify-center gap-1 mt-1">
-            Melhor amigo da Noiva <Heart size={10} className="text-marsala-500 fill-marsala-500" />
-          </p>
+
+          <div className="pt-8 border-t border-marsala-800/50">
+            <p className="text-marsala-300/40 text-[10px] uppercase font-bold tracking-widest mb-1">
+              Feito com carinho por
+            </p>
+            <a
+              href="https://www.instagram.com/souza_dsr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-marsala-200 transition-colors font-sans text-sm tracking-wide"
+            >
+              Rodrigo Souza
+            </a>
+            <p className="text-marsala-400 text-[10px] flex items-center justify-center gap-1 mt-2">
+              Melhor amigo da Noiva <Heart size={8} className="text-marsala-500 fill-marsala-500" />
+            </p>
+          </div>
         </div>
       </footer>
 
@@ -340,6 +378,7 @@ const App: React.FC = () => {
           onClose={() => setIsAdminOpen(false)}
           onAddGift={handleAddGift}
           onRemoveGift={handleRemoveGift}
+          onResetGift={handleResetGift}
           onBulkAdd={handleBulkAdd}
           onLogout={() => {
             setIsAdminAuthenticated(false);
