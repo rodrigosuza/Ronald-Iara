@@ -1,15 +1,12 @@
 {
     "cleanUrls": true,
+    "trailingSlash": true,
     "routes": [
-        {
-            "src": "/teste",
-            "dest": "/teste.html"
-        },
         {
             "handle": "filesystem"
         },
         {
-            "src": "/.*",
+            "src": "/(..*)",
             "dest": "/index.html"
         }
     ]
