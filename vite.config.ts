@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => {
     build: {
       rollupOptions: {
         input: {
-          main: path.resolve(__dirname, 'index.html'),
-          teste: path.resolve(__dirname, 'teste.html'),
+          main: 'index.html',
+          teste: 'teste.html',
         },
       },
     },
