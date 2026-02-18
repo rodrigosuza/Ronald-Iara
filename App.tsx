@@ -156,7 +156,7 @@ const App: React.FC = () => {
 
     if (error) {
       console.error('Error adding gift:', error);
-      alert("Erro ao adicionar presente.");
+      alert(`Erro ao adicionar presente: ${error.message || 'Erro desconhecido'}`);
     } else if (data && data[0]) {
       const addedGift: Gift = {
         id: data[0].id,
