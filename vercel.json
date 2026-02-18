@@ -1,13 +1,17 @@
 {
     "cleanUrls": true,
-    "trailingSlash": true,
-    "routes": [
+    "rewrites": [
         {
-            "handle": "filesystem"
+            "source": "/teste/(.*)",
+            "destination": "/teste/index.html"
         },
         {
-            "src": "/(..*)",
-            "dest": "/index.html"
+            "source": "/teste",
+            "destination": "/teste/index.html"
+        },
+        {
+            "source": "/((?!teste|assets|favicon|icon).* )",
+            "destination": "/index.html"
         }
     ]
 }
