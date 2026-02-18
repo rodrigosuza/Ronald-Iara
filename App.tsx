@@ -247,7 +247,6 @@ const App: React.FC = () => {
       <nav className="fixed w-full z-40 bg-white/95 backdrop-blur-md border-b border-marsala-100 shadow-sm transition-all h-14 md:h-16">
         <div className="max-w-2xl mx-auto px-4 h-full flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/favicon.png" alt="Logo" className="h-8 w-8 object-contain" />
             <span className="font-serif text-xl md:text-2xl tracking-tight text-marsala-900">Ronald & Iara</span>
           </div>
           <button
